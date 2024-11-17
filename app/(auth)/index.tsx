@@ -8,8 +8,7 @@ import {
   Image,
   Pressable,
 } from "react-native";
-import { InputField } from '@/components';
-import Link from '../components/shared/Link';
+import { InputField, Link } from '@/components';
 
 interface User {
   email: string;
@@ -53,11 +52,9 @@ export default function Index() {
       password: 'contrA|123'
     }
   });
-
   const router = useRouter();
-
   const onLogin = ( data: User ) => {
-    router.push('/home');
+    router.replace('/(app)');
   }
 
   return (

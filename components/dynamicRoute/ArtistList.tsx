@@ -1,18 +1,16 @@
 import React from 'react';
 import { View, FlatList, TouchableOpacity } from 'react-native';
-import ArtistBox from './ArtistBox';
+import ArtistBox from '../ArtistBox';
 import { Artist } from '@/types/artist';
 import { useRouter } from 'expo-router';
 
-export default function ArtistList( { artists }: { artists: Artist[]} ) {
+export default function DynamicArtistList( { artists }: { artists: Artist[]} ) {
   const router = useRouter();
 
-  const handlePress = ( artist:Artist ) => router.push({
-    pathname: "/ArtistDetailView",
+  const handlePress = ( id: string ) => router.push({
+    pathname: "/artistDetail/[id]",
     params: {
-      id: artist.id,
-      name: artist.name,
-      image: artist.image
+      id: id,
     },
   })
 
@@ -20,11 +18,11 @@ export default function ArtistList( { artists }: { artists: Artist[]} ) {
     <View>
       <FlatList
         data={artists}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <TouchableOpacity
             testID={`artist-box-${item.name}`}
-            onPress={() => handlePress(item)}
+            onPress={() => handlePress(item.id)}
           >
             <ArtistBox artist={item} />
           </TouchableOpacity>

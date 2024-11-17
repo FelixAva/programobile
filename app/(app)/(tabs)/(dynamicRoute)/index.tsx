@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { ScrollView } from 'react-native';
 import styled from 'styled-components/native';
-import { getMusicData } from './api-client';
-import ArtistList from '../components/ArtistList';
+import { getMusicData } from '../../../api-client';
+import { DynamicArtistList as ArtistList } from '@/components';
 import { Artist } from '@/types/artist';
 
-const MainContainer = styled(View)`
+const MainContainer = styled(ScrollView)`
   flex: 1;
-  background-color: #fff;
+  background-color: #F5FCFF;
 `
 
 export default function Home() {
   const [artists, setArtists] = useState<Artist[]>([]);
 
   useEffect(() => {
-    getMusicData().then(data => setArtists(data))
+    getMusicData().then(data => setArtists(data));
   }, []);
 
   return (
-    <View>
+    <MainContainer>
       { artists && <ArtistList artists={ artists } /> }
-    </View>
+    </MainContainer>
   );
 }

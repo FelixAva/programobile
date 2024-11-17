@@ -1,10 +1,10 @@
 import { ArtistResource } from '@/types/artist';
 
-const API_KEY = 'a0b7538025b8a38c70ce8dd816798f6b';
-const URL = `https://ws.audioscrobbler.com/2.0/?method=geo.gettopartists&country=spain&api_key=${API_KEY}&format=json`;
+const API_KEY = '6f70012877720d0a018cb6ee9bf33799';
+const URLBase = `https://ws.audioscrobbler.com/2.0/?method=`;
 
 function getMusicData() {
-  return fetch(`${ URL }`, {
+  return fetch(`${ URLBase }geo.gettopartists&country=spain&api_key=${API_KEY}&format=json`, {
     method: 'GET',
     headers: {
       Accept: 'application/json',
@@ -14,7 +14,6 @@ function getMusicData() {
   .then(response => response.json())
   .then(data => data.topartists.artist)
   .then(artists => artists.map( (artist: ArtistResource) => {
-    console.log(artist.image[0]['#text'])
     return {
       id: artist.mbid,
       name: artist.name,
@@ -24,4 +23,22 @@ function getMusicData() {
   .catch((error) => console.log(error));
 }
 
-export { getMusicData }
+function getArtistData( mbid: string ) {
+  return fetch(`${ URLBase }artist.getinfo&mbid=${mbid}&api_key=${API_KEY}&format=json`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    }
+  })
+  .then( response => response.json() )
+  .then( data => data.artist )
+  .then( artist => {
+    return {
+      name: artist.name,
+      image: artist.image[0]['#text']
+    }
+  } )
+}
+
+export { getMusicData, getArtistData }

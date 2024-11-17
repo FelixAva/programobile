@@ -14,9 +14,9 @@ const MainContainer = styled(View)`
 `
 
 const ImageContainer = styled(Image)`
-width: 150px;
-height: 150px;
-resize-mode: contain;
+  width: 150px;
+  height: 150px;
+  resize-mode: contain;
 `
 
 const Info = styled(View)`
