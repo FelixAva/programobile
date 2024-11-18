@@ -27,7 +27,6 @@ const RouteName = styled(Text)`
 export default function Link( { label, route }: Props ) {
   return (
     <Pressable onPress={ () => router.replace(`/${ route }`) }>
-
       <StyText>
         { label } <RouteName>{ route === 'register' ? 'Register' : 'Log In' }</RouteName>
       </StyText>

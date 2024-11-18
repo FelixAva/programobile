@@ -38,7 +38,8 @@ function getArtistData( mbid: string ) {
       name: artist.name,
       image: artist.image[0]['#text']
     }
-  } )
+  })
+  .catch((error) => console.log(error));
 }
 
 export { getMusicData, getArtistData }

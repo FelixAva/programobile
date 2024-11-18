@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 import { View, Text, Pressable } from 'react-native';
 import { Controller, useForm } from 'react-hook-form';
-import { InputField, Link } from '@/components';
+import { InputField, Link,Button } from '@/components';
 import { router } from 'expo-router';
 
 interface User {
@@ -18,21 +18,6 @@ const MainContainer = styled(View)`
   align-items: center;
 
   background-color: #F5FCFF;
-`
-
-const Button = styled(Pressable)`
-  width: 200px;
-  height: 50px;
-  border-radius: 10px;
-
-  align-items: center;
-  justify-content: center;
-  background-color: lightblue;
-`
-
-const StyText = styled(Text)`
-  font-size: 18px;
-  color: #000;
 `
 
 export default function Register() {
@@ -142,11 +127,10 @@ export default function Register() {
         name='cPassword'
       />
 
-      <Button onPress={ handleSubmit(onRegister) }>
-        <StyText>
-          Log In
-        </StyText>
-      </Button>
+      <Button
+        title='Register'
+        action={ handleSubmit( onRegister ) }
+      />
 
       <Link label='Go to' route='' />
     </MainContainer>

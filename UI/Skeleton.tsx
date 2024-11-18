@@ -10,11 +10,8 @@ interface Props {
 }
 
 const SkeletonContainer = styled(View)`
-  width: 300px;
-  height: 30px;
   background-color: gray;
   border-radius: 7px;
-  margin: 10px;
 `
 
 export default function Skeleton( { width, height, color1, color2 }: Props ) {

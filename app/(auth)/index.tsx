@@ -8,7 +8,7 @@ import {
   Image,
   Pressable,
 } from "react-native";
-import { InputField, Link } from '@/components';
+import { InputField, Link, Button } from '@/components';
 
 interface User {
   email: string;
@@ -28,21 +28,6 @@ const MainContainer = styled(View)`
 const ImageContainer = styled(Image)`
   width: 300px;
   height: 200px;
-`
-
-const Button = styled(Pressable)`
-  width: 200px;
-  height: 50px;
-  border-radius: 10px;
-
-  align-items: center;
-  justify-content: center;
-  background-color: lightblue;
-`
-
-const StyText = styled(Text)`
-  font-size: 18px;
-  color: #000;
 `
 
 export default function Index() {
@@ -125,11 +110,10 @@ export default function Index() {
         name='password'
       />
 
-      <Button onPress={ handleSubmit(onLogin) }>
-        <StyText>
-          Log In
-        </StyText>
-      </Button>
+      <Button
+        title='Log In'
+        action={ handleSubmit(onLogin) }
+      />
 
       <Link label='Go to' route='register' />
     </MainContainer>
