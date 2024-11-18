@@ -4,7 +4,6 @@ import styled from 'styled-components/native';
 import { getMusicData } from '../../../api-client';
 import { DynamicArtistList as ArtistList } from '@/components';
 import { Artist } from '@/types/artist';
-import { Loading, Skeleton } from '@/UI';
 
 const MainContainer = styled(View)`
   flex: 1;

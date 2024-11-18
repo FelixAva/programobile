@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 
 interface Props {
   title: string;
-  light: boolean;
+  textColor?: string;
   customStyle?: StyleProp<ViewStyle>;
   action: () => void;
 }
@@ -24,13 +24,13 @@ const Title = styled(Text)`
   font-size: 18px;
 `
 
-export default function Button( { title, customStyle, action, light }: Props ) {
+export default function Button( { title, customStyle, action, textColor = 'black'  }: Props ) {
   return (
     <ButtonContainer
       style={ customStyle }
       onPress={ action }
     >
-      <Title style={ light ? {color: '#fff'} : { color: '#000' } }>{ title }</Title>
+      <Title style={{ color: textColor }}>{ title }</Title>
     </ButtonContainer>
   );
 }
