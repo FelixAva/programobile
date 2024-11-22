@@ -40,7 +40,7 @@ export default function ComponentScreen({ artist }: { artist: Artist }) {
         testID='artist-image'
       />
       <Info>
-        <Name>{ artist.name }</Name>
+        <Name testID='artist-name'>{ artist.name }</Name>
       </Info>
     </MainContainer>
   );

@@ -17,19 +17,18 @@ export default function StaticArtistList( { artists }: { artists: Artist[]} ) {
   })
 
   return (
-    <View>
-      <FlatList
-        data={artists}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            testID={`artist-box-${item.name}`}
-            onPress={() => handlePress(item)}
-          >
-            <ArtistBox artist={item} />
-          </TouchableOpacity>
-        )}
-      />
-    </View>
+    <FlatList
+      testID='artist-list'
+      data={artists}
+      keyExtractor={(item) => item.id}
+      renderItem={({ item }) => (
+        <TouchableOpacity
+          testID={`artist-box-${item.name}`}
+          onPress={() => handlePress(item)}
+        >
+          <ArtistBox artist={item} />
+        </TouchableOpacity>
+      )}
+    />
   );
 }

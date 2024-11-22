@@ -1,14 +1,13 @@
 import { Artist } from '@/types/artist';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
 import React, { useEffect } from 'react';
-import { View, Text, Image, InteractionManager } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import styled from 'styled-components/native';
 
 const MainContainer = styled(View)`
   flex: 1;
   background-color: #F5FCFF;
   align-items: center;
-  gap: 45;
 `
 const ImageContainer = styled(Image)`
   width: 100%;
@@ -18,6 +17,7 @@ const ImageContainer = styled(Image)`
 const Name = styled(Text)`
   flex: 1;
   font-size: 22px;
+  margin-top: 45px;
 `
 
 export default function ArtistDetailView() {
@@ -32,11 +32,12 @@ export default function ArtistDetailView() {
   }, []);
 
   return (
-    <MainContainer id={ id }>
+    <MainContainer>
       <ImageContainer
+        testID='image-container'
         source={{ uri: image }}
       />
-      <Name>{ name } { id }</Name>
+      <Name testID='name-container' >{ name } { id }</Name>
     </MainContainer>
   );
 }
