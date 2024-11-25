@@ -1,4 +1,4 @@
-import { getArtistData } from '@/app/api-client';
+import { getArtistData } from '@/api/api-client';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
 import React, { useEffect } from 'react';
 import { View, Text } from 'react-native';

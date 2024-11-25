@@ -4,7 +4,7 @@ import ArtistBox from '../ArtistBox';
 import { Artist } from '@/types/artist';
 import { useRouter } from 'expo-router';
 import { Loading } from '@/UI';
-import { getMusicData } from '@/app/api-client';
+import { getMusicData } from '@/api/api-client';
 
 export default function DynamicArtistList() {
   const router = useRouter();

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import styled from 'styled-components/native';
-import { getMusicData } from '../../../api-client';
+import { getMusicData } from '../../../../api/api-client';
 import { StaticArtistList as ArtistList} from '@/components';
 import { Artist } from '@/types/artist';
 
