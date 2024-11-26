@@ -1,6 +1,7 @@
+import { getArtistData } from '@/api/api-client';
 import { Artist } from '@/types/artist';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Image } from 'react-native';
 import styled from 'styled-components/native';
 
@@ -21,15 +22,23 @@ const Name = styled(Text)`
 `
 
 export default function ArtistDetailView() {
-
   const navigation = useNavigation();
-  const { id, name, image } = useLocalSearchParams() as unknown as Artist;
+  const { id } = useLocalSearchParams() as unknown as { id: string };
+  const [name, setName] = useState<string>();
+  const [image, setImage] = useState<string>();
+
+  useEffect(() => {
+    getArtistData( id ).then( (data) => {
+      setName( data.name );
+      setImage( data.image );
+    });
+  }, []);
 
   useEffect(() => {
     navigation.setOptions({
       title: name
     })
-  }, []);
+  }, [ name, image ]);
 
   return (
     <MainContainer>
