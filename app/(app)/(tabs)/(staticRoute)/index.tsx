@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import styled from 'styled-components/native';
-import { getMusicData } from '../../../../api/api-client';
+import { getTopArtist } from '../../../../api/api-client';
 import { StaticArtistList as ArtistList} from '@/components';
 import { Artist } from '@/types/artist';
 
@@ -14,7 +14,7 @@ export default function Home() {
   const [artists, setArtists] = useState<Artist[]>([]);
 
   useEffect(() => {
-    getMusicData().then(data => setArtists(data));
+    getTopArtist('spain').then(data => setArtists(data));
   }, []);
 
   return (
