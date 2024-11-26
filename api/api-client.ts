@@ -38,11 +38,11 @@ const getArtistData = async ( mbid: string ) => {
   };
 
   const { data } = await axios.get( api_url, { params } );
-  const artist = data.artist;
+  const artist: ArtistResource = data.artist;
 
   return {
     name: artist.name,
-    image: artist.image
+    image: artist.image[0]["#text"]
   };
 };
 

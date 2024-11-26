@@ -24,29 +24,28 @@ const Name = styled(Text)`
 export default function ArtistDetailView() {
   const navigation = useNavigation();
   const { id } = useLocalSearchParams() as unknown as { id: string };
-  const [name, setName] = useState<string>();
-  const [image, setImage] = useState<string>();
+  const [artist, setArtist] = useState<Artist>();
 
   useEffect(() => {
     getArtistData( id ).then( (data) => {
-      setName( data.name );
-      setImage( data.image );
+      setArtist({ id, ...data });
     });
   }, []);
 
   useEffect(() => {
     navigation.setOptions({
-      title: name
+      title: artist?.name
     })
-  }, [ name, image ]);
+    console.log(artist?.image)
+  }, [ artist ]);
 
   return (
     <MainContainer>
       <ImageContainer
         testID='image-container'
-        source={{ uri: image }}
+        source={{ uri: artist?.image }}
       />
-      <Name testID='name-container' >{ name } { id }</Name>
+      <Name testID='name-container' >{ artist?.name } { artist?.id }</Name>
     </MainContainer>
   );
 }
