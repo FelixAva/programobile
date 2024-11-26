@@ -3,17 +3,16 @@ import { View, FlatList, TouchableOpacity } from 'react-native';
 import ArtistBox from '../ArtistBox';
 import { Artist } from '@/types/artist';
 import { useRouter } from 'expo-router';
-import { Loading } from '@/UI';
-import { getMusicData } from '@/api/api-client';
+import { getTopArtist } from '@/api/api-client';
 
 export default function DynamicArtistList() {
   const router = useRouter();
   const [artists, setArtists] = useState<Artist[] | undefined>( undefined );
 
   useEffect(() => {
-    getMusicData().then(data => {
+    getTopArtist('spain').then(( data: Artist[] ) => {
       setArtists(data);
-    })
+    });
   }, [])
 
   const handlePress = ( id: string ) => router.push({
