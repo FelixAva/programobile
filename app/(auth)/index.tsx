@@ -1,4 +1,4 @@
-import { router, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import React from 'react';
 import styled from 'styled-components/native';
 import { useForm, Controller } from 'react-hook-form';
@@ -9,9 +9,10 @@ import {
   Pressable,
 } from "react-native";
 import { InputField, Link, Button } from '@/components';
+import { getMobileSession } from '@/api/api-client';
 
 interface User {
-  email: string;
+  username: string;
   password: string;
 }
 
@@ -33,12 +34,13 @@ const ImageContainer = styled(Image)`
 export default function Index() {
   const { control,handleSubmit,formState: { errors } } = useForm({
     defaultValues: {
-      email: 'felix@gmail.com',
+      username: 'felix@gmail.com',
       password: 'contrA|123'
     }
   });
   const router = useRouter();
   const onLogin = ( data: User ) => {
+    getMobileSession( 'Faag05', 'C@ricatura05' );
     router.replace('/(app)');
   }
 
@@ -55,25 +57,21 @@ export default function Index() {
           required: {
             message: 'This field is required',
             value: true
-          },
-          pattern: {
-            message: 'Type a valid email',
-            value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
           }
         }}
         render={({ field: { onChange, onBlur, value } }) => (
           <InputField
-            label='Email'
+            label='Username'
             inputProps={{
-              placeholder:"Type your email",
+              placeholder:"Type your username",
               onBlur: onBlur,
               onChangeText: onChange,
               value: value
             }}
-            error={ errors.email?.message }
+            error={ errors.username?.message }
           />
         )}
-        name='email'
+        name='username'
       />
 
       <Controller
@@ -82,16 +80,6 @@ export default function Index() {
           required: {
             message: 'This field is required',
             value: true
-          },
-          minLength: {
-            message: 'Min length is 8',
-            value: 8
-          },
-          validate: {
-            hasUpperLower: value =>
-              /^(?=.*[a-z])(?=.*[A-Z])/.test(value) || 'At least one lowercase and one uppercase letter',
-            hasSpecialChar: value =>
-              /[!@#$%^&*(),.?":{}|<>]/.test(value) || 'At least one special character',
           }
         }}
         render={({ field: { onChange, onBlur, value } }) => (
