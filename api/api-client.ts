@@ -1,8 +1,11 @@
 import axios from 'axios';
-import { Artist, ArtistResource } from '@/types/artist';
+import { ArtistResource } from '@/types/artist';
+import { hashMd5 } from '@/helpers/md5.hashing';
+import { User, UserAPIResponse } from '@/types/user';
 
 const api_url = process.env.EXPO_PUBLIC_API_URL as string;
 const api_key = process.env.EXPO_PUBLIC_API_KEY;
+const shared_secret = process.env.EXPO_PUBLIC_SHARED_SECRET;
 
 const getTopArtist = async ( country: string ) => {
   const params = {
@@ -46,7 +49,33 @@ const getArtistData = async ( mbid: string ) => {
   };
 };
 
+const getMobileSession = async ( username: string, password: string ): Promise<UserAPIResponse> => {
+  const api_signature = hashMd5(`api_key${api_key}methodauth.getMobileSessionpassword${password}username${username}${shared_secret}`);
+  const params = {
+    method: 'auth.getMobileSession',
+    username,
+    password,
+    api_key,
+    api_sig: api_signature,
+    format: 'json'
+  }
+
+  try {
+    const { data } = await axios.post( api_url, params, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    } );
+
+    return data.session;
+  } catch (error: any) {
+    console.error("Error getting the session:", error.response?.data || error.message);
+    throw new Error("Error getting the session. Check your credentials");
+  }
+};
+
 export {
   getTopArtist,
-  getArtistData
+  getArtistData,
+  getMobileSession
 }
