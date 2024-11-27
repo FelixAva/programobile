@@ -28,7 +28,7 @@ export default function User() {
   const onLogOut = () => {
     setIsLoading( true );
     setTimeout(() => {
-      router.replace('/(auth)');
+      router.replace('/');
       setIsLoading( false );
     }, 2000);
   };

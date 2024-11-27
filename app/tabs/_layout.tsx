@@ -17,25 +17,18 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name='(dynamicRoute)'
+        name='(artists)'
         options={{
-          title: 'Dynamic Route',
+          title: 'Artists',
           tabBarIcon: ({ color }) => <TabBarIcon name='add' color={ color } />,
         }}
       />
       <Tabs.Screen
-        name='(staticRoute)'
-        options={{
-          title: 'Static Route',
-          tabBarIcon: ({ color }) => <TabBarIcon name='add-circle' color={ color } />,
-        }}
-      />
-      <Tabs.Screen
-        name='profile'
+        name='(profile)'
         options={{
           title: 'Profile',
           href: {
-            pathname: '/profile/[user]',
+            pathname: '/tabs/(profile)/[user]',
             params: {
               user: 'evanbacon'
             }

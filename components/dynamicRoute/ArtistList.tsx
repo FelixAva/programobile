@@ -16,7 +16,7 @@ export default function DynamicArtistList() {
   }, [])
 
   const handlePress = ( id: string ) => router.push({
-    pathname: "/artistDetail/[id]",
+    pathname: "/tabs/(artists)/[id]",
     params: {
       id: id,
     },

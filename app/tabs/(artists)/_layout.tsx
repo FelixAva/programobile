@@ -1,7 +1,7 @@
+import { Stack } from 'expo-router';
 import React from 'react';
-import { Slot, Stack } from 'expo-router';
 
-export default function AuthLayout() {
+export default function DynamicTabLayout() {
   return (
     <Stack
       screenOptions={{
@@ -11,8 +11,11 @@ export default function AuthLayout() {
       <Stack.Screen
         name='index'
         options={{
-          title: 'Login'
+          title: 'Artists'
         }}
+      />
+      <Stack.Screen
+        name='[id]'
       />
     </Stack>
   );

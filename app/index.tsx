@@ -4,9 +4,7 @@ import styled from 'styled-components/native';
 import { useForm, Controller } from 'react-hook-form';
 import {
   View,
-  Text,
   Image,
-  Pressable,
 } from "react-native";
 import { InputField, Link, Button } from '@/components';
 import { getMobileSession } from '@/api/api-client';
@@ -41,7 +39,7 @@ export default function Index() {
   const router = useRouter();
   const onLogin = ( data: User ) => {
     getMobileSession( 'Faag05', 'C@ricatura05' );
-    router.replace('/(app)');
+    router.replace('/tabs');
   }
 
   return (
@@ -102,8 +100,6 @@ export default function Index() {
         title='Log In'
         action={ handleSubmit(onLogin) }
       />
-
-      <Link label='Go to' route='register' />
     </MainContainer>
   );
 }
