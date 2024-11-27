@@ -14,9 +14,6 @@ export default function DynamicTabLayout() {
           title: 'Artists'
         }}
       />
-      <Stack.Screen
-        name='[id]'
-      />
     </Stack>
   );
 }
