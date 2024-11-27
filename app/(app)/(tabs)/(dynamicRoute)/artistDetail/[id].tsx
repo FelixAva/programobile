@@ -36,7 +36,6 @@ export default function ArtistDetail() {
     navigation.setOptions({
       title: artist?.name
     })
-    console.log(artist?.image)
   }, [ artist ]);
 
   return (
