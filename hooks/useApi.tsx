@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { ArtistResource } from '@/types/artist';
 import { hashMd5 } from '@/helpers/md5.hashing';
+import { Artist, ArtistResource } from '@/types/artist';
 import { UserSession } from '@/types/user';
 
 const useApi = () => {
@@ -10,6 +10,7 @@ const useApi = () => {
 
   // Specific states of each API response
   const [session, setSession] = useState<UserSession>();
+  const [topArtist, setTopArtist] = useState<Artist[]>();
 
   const api_url = process.env.EXPO_PUBLIC_API_URL as string;
   const api_key = process.env.EXPO_PUBLIC_API_KEY;
@@ -30,13 +31,13 @@ const useApi = () => {
       const { data } = await axios.get( api_url, { params } );
       const artists = data.topartists.artist;
 
-      return artists.map( (artist: ArtistResource) => {
+      setTopArtist(artists.map( (artist: ArtistResource) => {
         return {
           id: artist.mbid,
           name: artist.name,
           image: artist.image[0]["#text"]
         }
-      });
+      }));
 
     } catch (error: any) {
       setError( error.response?.data.message || error.message );
@@ -108,6 +109,7 @@ const useApi = () => {
     isLoading,
     error,
     session,
+    topArtist,
 
     // Methods
     getTopArtist,
