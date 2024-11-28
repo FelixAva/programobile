@@ -56,11 +56,9 @@ export default function Index() {
   } = useApi();
 
   useEffect(() => {
-    if (session) {
-      console.log('Storage the user session');
-      alert(`Welcome ${session.name}`);
-      router.replace('/tabs');
-    }
+    console.log('Storage the user session');
+    alert(`Welcome ${session?.name}`);
+    router.replace('/tabs');
   }, [ session ]);
 
   const onLogin = ( data: User ) => {

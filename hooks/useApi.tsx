@@ -11,6 +11,7 @@ const useApi = () => {
   // Specific states of each API response
   const [session, setSession] = useState<UserSession>();
   const [topArtist, setTopArtist] = useState<Artist[]>();
+  const [artistData, setArtistData] = useState<Artist>();
 
   const api_url = process.env.EXPO_PUBLIC_API_URL as string;
   const api_key = process.env.EXPO_PUBLIC_API_KEY;
@@ -62,10 +63,11 @@ const useApi = () => {
       const { data } = await axios.get( api_url, { params } );
       const artist: ArtistResource = data.artist;
 
-      return {
+      setArtistData({
+        id: `${artist.mbid}`,
         name: artist.name,
         image: artist.image[0]["#text"]
-      };
+      });
     } catch ( error: any ) {
       setError( error.response?.data.message || error.message );
       console.error('Error getting the artist data: ', error.response?.data.message || error.message);
@@ -110,6 +112,7 @@ const useApi = () => {
     error,
     session,
     topArtist,
+    artistData,
 
     // Methods
     getTopArtist,

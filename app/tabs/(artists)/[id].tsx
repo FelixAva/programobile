@@ -1,9 +1,9 @@
-import { getArtistData } from '@/hooks/useApi';
-import { Artist } from '@/types/artist';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image } from 'react-native';
+import { Artist } from '@/types/artist';
 import styled from 'styled-components/native';
+import useApi from '@/hooks/useApi';
 
 const MainContainer = styled(View)`
   flex: 1;
@@ -24,27 +24,30 @@ const Name = styled(Text)`
 export default function ArtistDetail() {
   const navigation = useNavigation();
   const { id } = useLocalSearchParams() as unknown as { id: string }; //? Get id and convert to unknown and later specify that id is a string
-  const [artist, setArtist] = useState<Artist>();
+  const {
+    error,
+    isLoading,
+    artistData,
+    getArtistData
+  } = useApi();
 
   useEffect(() => {
-    getArtistData( id ).then( (data) => {
-      setArtist({ id, ...data });
-    });
+    getArtistData( id );
   }, []);
 
   useEffect(() => {
     navigation.setOptions({
-      title: artist?.name
+      title: artistData?.name
     })
-  }, [ artist ]);
+  }, [ artistData ]);
 
   return (
     <MainContainer>
       <ImageContainer
         testID='image-container'
-        source={{ uri: artist?.image }}
+        source={{ uri: artistData?.image }}
       />
-      <Name testID='name-container' >{ artist?.name } { artist?.id }</Name>
+      <Name testID='name-container' >{ artistData?.name } { artistData?.id }</Name>
     </MainContainer>
   );
 }
