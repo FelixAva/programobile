@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
 import { useForm, Controller } from 'react-hook-form';
 import {
@@ -7,7 +7,7 @@ import {
   Image,
 } from "react-native";
 import { InputField, Button } from '@/components';
-import { getMobileSession } from '@/api/api-client';
+import useApi from '@/hooks/useApi';
 import { UserSession } from '../types/user';
 import { useRouter } from 'expo-router';
 
@@ -47,16 +47,19 @@ export default function Index() {
       password: 'contrA|123'
     }
   });
-  const [error, setError] = useState<String | undefined>();
+  const {
+    error,
+    isLoading,
+    getMobileSession
+  } = useApi();
 
   const onLogin = ( data: User ) => {
-    getMobileSession( 'Faag05', 'Cricatura05' )
-    .then( (response: UserSession | string) => {
-      if (typeof response === 'object') {
+    getMobileSession( 'Faag05', 'C@ricatura05' )
+    .then( (response: UserSession) => {
+      if ( error === null ) {
+        console.log('Storage the user data');
         alert(`Welcome ${response.name}`);
         router.replace('/tabs');
-      } else {
-        setError( response );
       }
     });
   }
