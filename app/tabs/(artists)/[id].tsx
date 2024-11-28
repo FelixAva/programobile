@@ -1,4 +1,4 @@
-import { getArtistData } from '@/api/api-client';
+import { getArtistData } from '@/hooks/useApi';
 import { Artist } from '@/types/artist';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
 import React, { useEffect, useState } from 'react';
