@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ArtistResource } from '@/types/artist';
 import { hashMd5 } from '@/helpers/md5.hashing';
-import { User, UserAPIResponse } from '@/types/user';
+import { User, UserSession } from '@/types/user';
 
 const api_url = process.env.EXPO_PUBLIC_API_URL as string;
 const api_key = process.env.EXPO_PUBLIC_API_KEY;
@@ -49,7 +49,7 @@ const getArtistData = async ( mbid: string ) => {
   };
 };
 
-const getMobileSession = async ( username: string, password: string ): Promise<UserAPIResponse> => {
+const getMobileSession = async ( username: string, password: string ): Promise<UserSession> => {
   const api_signature = hashMd5(`api_key${api_key}methodauth.getMobileSessionpassword${password}username${username}${shared_secret}`);
   const params = {
     method: 'auth.getMobileSession',
@@ -69,8 +69,8 @@ const getMobileSession = async ( username: string, password: string ): Promise<U
 
     return data.session;
   } catch (error: any) {
-    console.error("Error getting the session:", error.response?.data || error.message);
-    throw new Error("Error getting the session. Check your credentials");
+    console.error("Error getting the session:", error.response?.data.message || error.message);
+    return error.response?.data.message || error.message;
   }
 };
 
