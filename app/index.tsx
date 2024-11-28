@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { InputField, Button } from '@/components';
 import useApi from '@/hooks/useApi';
-import { UserSession } from '../types/user';
+import { UserSession } from '@/types/user';
 import { useRouter } from 'expo-router';
 import { Loading } from '@/UI';
 
@@ -51,18 +51,20 @@ export default function Index() {
   const {
     error,
     isLoading,
+    session,
     getMobileSession
   } = useApi();
 
+  useEffect(() => {
+    if (session) {
+      console.log('Storage the user session');
+      alert(`Welcome ${session.name}`);
+      router.replace('/tabs');
+    }
+  }, [ session ]);
+
   const onLogin = ( data: User ) => {
-    getMobileSession( 'Faag05', 'C@ricatura05' )
-    .then( (response: UserSession) => {
-      if ( error === null ) {
-        console.log('Storage the user data');
-        alert(`Welcome ${response.name}`);
-        router.replace('/tabs');
-      }
-    });
+    getMobileSession( 'Faag05', 'C@ricatura05' );
   }
 
   return (
