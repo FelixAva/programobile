@@ -1,6 +1,9 @@
-import React from 'react';
+// Libraries
 import { Pressable, StyleProp, Text, ViewStyle } from 'react-native';
 import styled from 'styled-components/native';
+
+// Components
+import React from 'react';
 
 interface Props {
   title: string;

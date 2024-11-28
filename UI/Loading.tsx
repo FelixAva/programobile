@@ -1,4 +1,7 @@
+// Libraries
 import React from 'react';
+
+// Components
 import { ActivityIndicator } from 'react-native';
 
 interface Props {

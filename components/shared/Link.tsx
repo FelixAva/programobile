@@ -1,11 +1,14 @@
+// Libraries
 import { router } from 'expo-router';
 import React from 'react';
+import styled from 'styled-components/native';
+
+// Components
 import {
   Pressable,
   StyleSheet,
   Text
 } from 'react-native';
-import styled from 'styled-components/native';
 
 interface Props {
   label: string;

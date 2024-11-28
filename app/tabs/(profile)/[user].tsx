@@ -1,11 +1,18 @@
+// Libraries
 import { useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+
+// Hooks
 import styled from 'styled-components/native';
-import { capitalize } from '@/helpers/capitalize';
-import { Button } from '@/components';
-import { Colors } from '@/constants/Colors';
+
+// Components
+import { View, Text } from 'react-native';
 import { Loading } from '@/UI';
+import { Button } from '@/components';
+
+// Extras (Helpers, Constants, Types, Interfaces, Etc)
+import { capitalize } from '@/helpers/capitalize';
+import { Colors } from '@/constants/Colors';
 
 const MainContainer = styled(View)`
   flex: 1;

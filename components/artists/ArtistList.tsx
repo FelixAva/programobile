@@ -1,9 +1,13 @@
-import React, { Suspense, useEffect, useState } from 'react';
-import { View, FlatList, TouchableOpacity } from 'react-native';
-import ArtistBox from '../ArtistBox';
-import { Artist } from '@/types/artist';
+// Libraries
 import { useRouter } from 'expo-router';
+import React, { useEffect } from 'react';
+
+// Hooks
 import useApi from '@/hooks/useApi';
+
+// Components
+import { FlatList, TouchableOpacity } from 'react-native';
+import ArtistBox from '../ArtistBox';
 
 export default function ArtistList() {
   const router = useRouter();

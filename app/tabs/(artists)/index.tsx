@@ -1,6 +1,9 @@
+// Libraries
 import React, { Suspense, useEffect, useState } from 'react';
-import { View } from 'react-native';
 import styled from 'styled-components/native';
+
+// Components
+import { View } from 'react-native';
 import { ArtistList } from '@/components';
 
 const MainContainer = styled(View)`

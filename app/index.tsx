@@ -1,15 +1,19 @@
+// Libraries
+import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/native';
+
+// Hooks
 import { useForm, Controller } from 'react-hook-form';
+import useApi from '@/hooks/useApi';
+
+// Components
 import {
   View,
   Text,
   Image,
 } from "react-native";
 import { InputField, Button } from '@/components';
-import useApi from '@/hooks/useApi';
-import { UserSession } from '@/types/user';
-import { useRouter } from 'expo-router';
 import { Loading } from '@/UI';
 
 interface User {
@@ -56,9 +60,11 @@ export default function Index() {
   } = useApi();
 
   useEffect(() => {
-    console.log('Storage the user session');
-    alert(`Welcome ${session?.name}`);
-    router.replace('/tabs');
+    if (session) {
+      console.log('Storage the user session');
+      alert(`Welcome ${session.name}`);
+      router.replace('/tabs');
+    }
   }, [ session ]);
 
   const onLogin = ( data: User ) => {

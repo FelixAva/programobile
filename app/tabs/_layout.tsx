@@ -1,14 +1,11 @@
+// Libraries
 import { Tabs } from 'expo-router';
 import React from 'react';
+
+// Components
 import { TabBarIcon } from '@/components';
 
 export default function TabLayout() {
-
-  /*
-   * Function to get the user ID
-   * Pass the id to the User dynamic route TabScreen
-  */
-
   return (
     <Tabs
       screenOptions={{

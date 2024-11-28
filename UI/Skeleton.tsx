@@ -1,6 +1,8 @@
+// Libraries
 import React, { useEffect } from 'react';
-import { View, Text } from 'react-native';
 import styled from 'styled-components/native';
+
+// Components
 import Animated, {
   Easing,
   useAnimatedStyle,

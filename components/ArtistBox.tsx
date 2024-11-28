@@ -1,7 +1,12 @@
-import { Artist } from '@/types/artist';
+// Libraries
 import React from 'react';
-import { View, Text, Image } from 'react-native';
 import styled from 'styled-components/native';
+
+// Components
+import { View, Text, Image } from 'react-native';
+
+// Extras (Helpers, Constants, Types, Interfaces, Etc)
+import { Artist } from '@/types/artist';
 
 const MainContainer = styled(View)`
   margin: 5px;

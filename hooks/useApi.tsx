@@ -1,5 +1,8 @@
+// Libraries
 import axios from 'axios';
 import React, { useState } from 'react';
+
+// Extras (Helpers, Constants, Types, Interfaces, Etc)
 import { hashMd5 } from '@/helpers/md5.hashing';
 import { Artist, ArtistResource } from '@/types/artist';
 import { UserSession } from '@/types/user';
