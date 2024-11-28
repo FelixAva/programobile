@@ -1,8 +1,8 @@
 // Libraries
-import axios from 'axios';
 import React, { useState } from 'react';
 
 // Extras (Helpers, Constants, Types, Interfaces, Etc)
+import apiManager from '@/api/api-manager';
 import { hashMd5 } from '@/helpers/md5.hashing';
 import { Artist, ArtistResource } from '@/types/artist';
 import { UserSession } from '@/types/user';
@@ -16,7 +16,6 @@ const useApi = () => {
   const [topArtist, setTopArtist] = useState<Artist[]>();
   const [artistData, setArtistData] = useState<Artist>();
 
-  const api_url = process.env.EXPO_PUBLIC_API_URL as string;
   const api_key = process.env.EXPO_PUBLIC_API_KEY;
   const shared_secret = process.env.EXPO_PUBLIC_SHARED_SECRET;
 
@@ -27,12 +26,10 @@ const useApi = () => {
     const params = {
       method: 'geo.gettopartists',
       country: country,
-      api_key: api_key,
-      format: 'json'
     };
 
     try {
-      const { data } = await axios.get( api_url, { params } );
+      const { data } = await apiManager.get( '/', { params } );
       const artists = data.topartists.artist;
 
       setTopArtist(artists.map( (artist: ArtistResource) => {
@@ -58,12 +55,10 @@ const useApi = () => {
     const params = {
       method: 'artist.getinfo',
       mbid: mbid,
-      api_key: api_key,
-      format: 'json'
     };
 
     try {
-      const { data } = await axios.get( api_url, { params } );
+      const { data } = await apiManager.get( '/', { params } );
       const artist: ArtistResource = data.artist;
 
       setArtistData({
@@ -88,17 +83,18 @@ const useApi = () => {
       method: 'auth.getMobileSession',
       username,
       password,
-      api_key,
       api_sig: api_signature,
-      format: 'json'
+    }
+    const heaers = {
+      "Content-Type": "application/x-www-form-urlencoded"
     }
 
     try {
-      const { data } = await axios.post( api_url, params, {
+      const { data } = await apiManager.post( '/', params, {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         }
-      } );
+      });
 
       setSession( data.session );
     } catch (err: any) {
