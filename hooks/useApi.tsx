@@ -2,11 +2,14 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { ArtistResource } from '@/types/artist';
 import { hashMd5 } from '@/helpers/md5.hashing';
-import { User, UserSession } from '@/types/user';
+import { UserSession } from '@/types/user';
 
 const useApi = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | undefined>(undefined);
+  const [error, setError] = useState<string | null>(null);
+
+  // Specific states of each API response
+  const [session, setSession] = useState<UserSession>();
 
   const api_url = process.env.EXPO_PUBLIC_API_URL as string;
   const api_key = process.env.EXPO_PUBLIC_API_KEY;
@@ -14,7 +17,7 @@ const useApi = () => {
 
   const getTopArtist = async ( country: string ) => {
     setIsLoading( true );
-    setError( undefined );
+    setError( null );
 
     const params = {
       method: 'geo.gettopartists',
@@ -45,7 +48,7 @@ const useApi = () => {
 
   const getArtistData = async ( mbid: string ) => {
     setIsLoading( true );
-    setError( undefined );
+    setError( null );
 
     const params = {
       method: 'artist.getinfo',
@@ -72,7 +75,7 @@ const useApi = () => {
 
   const getMobileSession = async ( username: string, password: string ) => {
     setIsLoading( true );
-    setError( undefined );
+    setError( null );
 
     const api_signature = hashMd5(`api_key${api_key}methodauth.getMobileSessionpassword${password}username${username}${shared_secret}`);
     const params = {
@@ -91,10 +94,10 @@ const useApi = () => {
         }
       } );
 
-      return data.session;
-    } catch (error: any) {
-      console.error("Error getting the session:", error.response?.data.message || error.message);
-      setError( error.response?.data.message || error.message );
+      setSession( data.session );
+    } catch (err: any) {
+      console.error("Error getting the session:", err.response?.data.message || err.message);
+      setError( err.response?.data.message || err.message );
     } finally {
       setIsLoading( false );
     }
@@ -104,6 +107,7 @@ const useApi = () => {
     // Properties
     isLoading,
     error,
+    session,
 
     // Methods
     getTopArtist,
