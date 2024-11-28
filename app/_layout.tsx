@@ -1,6 +1,7 @@
 // Libraries
 import { Stack } from "expo-router";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ export default function RootLayout() {
           options={{ headerShown: false }}
         />
       </Stack>
+      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 }
