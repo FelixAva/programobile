@@ -70,7 +70,10 @@ const useApi = () => {
     }
   };
 
-  const getMobileSession = async ( username: string, password: string ): Promise<UserSession> => {
+  const getMobileSession = async ( username: string, password: string ) => {
+    setIsLoading( true );
+    setError( undefined );
+
     const api_signature = hashMd5(`api_key${api_key}methodauth.getMobileSessionpassword${password}username${username}${shared_secret}`);
     const params = {
       method: 'auth.getMobileSession',
@@ -91,7 +94,9 @@ const useApi = () => {
       return data.session;
     } catch (error: any) {
       console.error("Error getting the session:", error.response?.data.message || error.message);
-      return error.response?.data.message || error.message;
+      setError( error.response?.data.message || error.message );
+    } finally {
+      setIsLoading( false );
     }
   };
 
