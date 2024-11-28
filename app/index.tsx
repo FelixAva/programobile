@@ -10,6 +10,7 @@ import { InputField, Button } from '@/components';
 import useApi from '@/hooks/useApi';
 import { UserSession } from '../types/user';
 import { useRouter } from 'expo-router';
+import { Loading } from '@/UI';
 
 interface User {
   username: string;
@@ -122,10 +123,18 @@ export default function Index() {
         error && <ErrorContainer>{ error }</ErrorContainer>
       }
 
-      <Button
-        title='Log In'
-        action={ handleSubmit(onLogin) }
-      />
+      {
+        isLoading
+          ? (
+            <Loading color='blue' />
+          )
+          : (
+            <Button
+              title='Log In'
+              action={ handleSubmit(onLogin) }
+              />
+          )
+      }
     </MainContainer>
   );
 }
