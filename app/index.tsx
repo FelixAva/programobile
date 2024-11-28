@@ -1,13 +1,15 @@
-import { useRouter } from 'expo-router';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/native';
 import { useForm, Controller } from 'react-hook-form';
 import {
   View,
+  Text,
   Image,
 } from "react-native";
-import { InputField, Link, Button } from '@/components';
+import { InputField, Button } from '@/components';
 import { getMobileSession } from '@/api/api-client';
+import { UserSession } from '../types/user';
+import { useRouter } from 'expo-router';
 
 interface User {
   username: string;
@@ -29,17 +31,34 @@ const ImageContainer = styled(Image)`
   height: 200px;
 `
 
+const ErrorContainer = styled(Text)`
+  font-size: 20px;
+  color: red;
+  max-width: 350px;
+  line-height: 25px;
+  text-align: center;
+`
+
 export default function Index() {
+  const router = useRouter();
   const { control,handleSubmit,formState: { errors } } = useForm({
     defaultValues: {
       username: 'felix@gmail.com',
       password: 'contrA|123'
     }
   });
-  const router = useRouter();
+  const [error, setError] = useState<String | undefined>();
+
   const onLogin = ( data: User ) => {
-    getMobileSession( 'Faag05', 'C@ricatura05' );
-    router.replace('/tabs');
+    getMobileSession( 'Faag05', 'Cricatura05' )
+    .then( (response: UserSession | string) => {
+      if (typeof response === 'object') {
+        alert(`Welcome ${response.name}`);
+        router.replace('/tabs');
+      } else {
+        setError( response );
+      }
+    });
   }
 
   return (
@@ -95,6 +114,10 @@ export default function Index() {
         )}
         name='password'
       />
+
+      {
+        error && <ErrorContainer>{ error }</ErrorContainer>
+      }
 
       <Button
         title='Log In'
