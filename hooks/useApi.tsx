@@ -44,6 +44,9 @@ const useApi = () => {
   };
 
   const getArtistData = async ( mbid: string ) => {
+    setIsLoading( true );
+    setError( undefined );
+
     const params = {
       method: 'artist.getinfo',
       mbid: mbid,
@@ -51,13 +54,20 @@ const useApi = () => {
       format: 'json'
     };
 
-    const { data } = await axios.get( api_url, { params } );
-    const artist: ArtistResource = data.artist;
+    try {
+      const { data } = await axios.get( api_url, { params } );
+      const artist: ArtistResource = data.artist;
 
-    return {
-      name: artist.name,
-      image: artist.image[0]["#text"]
-    };
+      return {
+        name: artist.name,
+        image: artist.image[0]["#text"]
+      };
+    } catch ( error: any ) {
+      setError( error.response?.data.message || error.message );
+      console.error('Error getting the artist data: ', error.response?.data.message || error.message);
+    } finally {
+      setIsLoading( false );
+    }
   };
 
   const getMobileSession = async ( username: string, password: string ): Promise<UserSession> => {
