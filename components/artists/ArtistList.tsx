@@ -1,23 +1,33 @@
-import React from 'react';
-import { FlatList, TouchableOpacity } from 'react-native';
+import React, { Suspense, useEffect, useState } from 'react';
+import { View, FlatList, TouchableOpacity } from 'react-native';
 import ArtistBox from '../ArtistBox';
 import { Artist } from '@/types/artist';
 import { useRouter } from 'expo-router';
+import useApi from '@/hooks/useApi';
 
-export default function StaticArtistList( { artists }: { artists: Artist[]} ) {
+export default function ArtistList() {
   const router = useRouter();
+  const {
+    error,
+    isLoading,
+    topArtist,
+    getTopArtist
+  } = useApi();
+
+  useEffect(() => {
+    getTopArtist('spain');
+  }, [])
 
   const handlePress = ( id: string ) => router.push({
-    pathname: "/ArtistDetailView",
+    pathname: "/tabs/(artists)/[id]",
     params: {
-      id: id
+      id: id,
     },
   })
 
   return (
     <FlatList
-      testID='artist-list'
-      data={artists}
+      data={topArtist}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
         <TouchableOpacity

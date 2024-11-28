@@ -1,23 +1,19 @@
 // ? Components from ...
-// shared folder
+// Shared folder
 import InputField from "./shared/InputField";
 import Link from "./shared/Link";
 import Button from "./shared/Button";
 
-// staticRoute folder
-import StaticArtistList from "./staticRoute/ArtistList";
+// Artists folder
+import ArtistList from "./artists/ArtistList";
 
-// dynamicRoute folder
-import DynamicArtistList from "./dynamicRoute/ArtistList";
-
-// navigation folder
+// Navigation folder
 import { TabBarIcon } from "./navigation/TabBarIcon";
 
 export {
   InputField,
   Link,
   Button,
-  StaticArtistList,
-  DynamicArtistList,
+  ArtistList,
   TabBarIcon
 }
