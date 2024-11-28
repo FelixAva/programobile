@@ -3,7 +3,11 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 // Components
-import { View, Text, Image } from 'react-native';
+import {
+  View,
+  Text,
+  Image
+} from 'react-native';
 
 // Extras (Helpers, Constants, Types, Interfaces, Etc)
 import { Artist } from '@/types/artist';

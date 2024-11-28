@@ -1,6 +1,13 @@
 // Libraries
-import { useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
-import React, { useEffect, useState } from 'react';
+import {
+  useLocalSearchParams,
+  useNavigation,
+  useRouter
+} from 'expo-router';
+import React,{
+  useEffect,
+  useState
+} from 'react';
 
 // Hooks
 import styled from 'styled-components/native';

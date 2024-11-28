@@ -1,5 +1,8 @@
 // Libraries
-import { useLocalSearchParams, useNavigation } from 'expo-router';
+import {
+  useLocalSearchParams,
+  useNavigation
+} from 'expo-router';
 import React, { useEffect } from 'react';
 import styled from 'styled-components/native';
 
@@ -7,7 +10,11 @@ import styled from 'styled-components/native';
 import useApi from '@/hooks/useApi';
 
 // Components
-import { View, Text, Image } from 'react-native';
+import {
+  View,
+  Text,
+  Image
+} from 'react-native';
 
 const MainContainer = styled(View)`
   flex: 1;

@@ -1,5 +1,5 @@
 // Libraries
-import React, { Suspense, useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components/native';
 
 // Components

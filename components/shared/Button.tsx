@@ -1,5 +1,10 @@
 // Libraries
-import { Pressable, StyleProp, Text, ViewStyle } from 'react-native';
+import {
+  Pressable,
+  StyleProp,
+  Text,
+  ViewStyle
+} from 'react-native';
 import styled from 'styled-components/native';
 
 // Components
