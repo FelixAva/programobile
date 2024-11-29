@@ -14,7 +14,7 @@ const MainContainer = styled(View)`
 export default function Home() {
   return (
     <MainContainer>
-      <ArtistList />
+      <ArtistList country='spain' />
     </MainContainer>
   );
 }
