@@ -24,7 +24,7 @@ const getTopArtist = async ( country: string ) => {
   });
 };
 
-const getArtistData = async ( mbid: string ) => {
+const getArtistData = async ( mbid: string ): Promise<Artist> => {
   const params = {
     method: 'artist.getinfo',
     mbid: mbid,
