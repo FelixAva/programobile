@@ -7,7 +7,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components/native';
 
 // Hooks
-import useApi from '@/hooks/useApi';
+import { useQuery } from '@tanstack/react-query';
 
 // Components
 import {
@@ -15,6 +15,10 @@ import {
   Text,
   Image
 } from 'react-native';
+import { Loading } from '@/UI';
+
+// Extras (Helpers, Constants, Types, Interfaces, Etc)
+import { getArtistData } from '@/api/api-client';
 
 const MainContainer = styled(View)`
   flex: 1;
@@ -36,29 +40,30 @@ export default function ArtistDetail() {
   const navigation = useNavigation();
   const { id } = useLocalSearchParams() as unknown as { id: string }; //? Get id and convert to unknown and later specify that id is a string
   const {
-    error,
     isLoading,
-    artistData,
-    getArtistData
-  } = useApi();
-
-  useEffect(() => {
-    getArtistData( id );
-  }, []);
+    data,
+    isError,
+    error
+  } = useQuery({
+    queryKey: ['artist'],
+    queryFn: () => getArtistData( id )
+  });
 
   useEffect(() => {
     navigation.setOptions({
-      title: artistData?.name
+      title: data?.name
     })
-  }, [ artistData ]);
+  }, [ data ]);
+
+  if (isLoading) return <Loading color='blue' size={70} />
 
   return (
     <MainContainer>
       <ImageContainer
         testID='image-container'
-        source={{ uri: artistData?.image }}
+        source={{ uri: data?.image }}
       />
-      <Name testID='name-container' >{ artistData?.name } { artistData?.id }</Name>
+      <Name testID='name-container' >{ data?.name } { data?.id }</Name>
     </MainContainer>
   );
 }

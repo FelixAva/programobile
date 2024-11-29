@@ -4,6 +4,11 @@ export interface UserSession {
   subscriber: number;
 }
 
+export interface UserLogin {
+  username: string;
+  password: string;
+}
+
 export interface User {
   name:         string;
   age:          string;

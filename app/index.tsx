@@ -5,7 +5,7 @@ import styled from 'styled-components/native';
 
 // Hooks
 import { useForm, Controller } from 'react-hook-form';
-import useApi from '@/hooks/useApi';
+import { useMutation } from '@tanstack/react-query';
 
 // Components
 import {
@@ -16,10 +16,9 @@ import {
 import { InputField, Button } from '@/components';
 import { Loading } from '@/UI';
 
-interface User {
-  username: string;
-  password: string;
-}
+// Extras (Helpers, Constants, Types, Interfaces, Etc)
+import { getMobileSession } from '@/api/api-client';
+import { UserLogin } from '@/types/user';
 
 const MainContainer = styled(View)`
   flex: 1;
@@ -46,29 +45,31 @@ const ErrorContainer = styled(Text)`
 
 export default function Index() {
   const router = useRouter();
+
   const { control,handleSubmit,formState: { errors } } = useForm({
     defaultValues: {
-      username: 'felix@gmail.com',
-      password: 'contrA|123'
+      username: 'Faag05',
+      password: 'C@ricatura05'
     }
   });
-  const {
-    error,
-    isLoading,
-    session,
-    getMobileSession
-  } = useApi();
 
-  useEffect(() => {
-    if (session) {
+  const {
+    mutate,
+    isPending,
+    isError,
+    error,
+    data
+  } = useMutation({
+    mutationFn: getMobileSession,
+    onSuccess: (data) => {
       console.log('Storage the user session');
-      alert(`Welcome ${session.name}`);
+      alert(`Welcome ${data.name}`);
       router.replace('/tabs');
     }
-  }, [ session ]);
+  });
 
-  const onLogin = ( data: User ) => {
-    getMobileSession( 'Faag05', 'C@ricatura05' );
+  const onLogin = ( data: UserLogin ) => {
+    mutate(data);
   }
 
   return (
@@ -126,11 +127,11 @@ export default function Index() {
       />
 
       {
-        error && <ErrorContainer>{ error }</ErrorContainer>
+        isError && <ErrorContainer> {error.message} </ErrorContainer>
       }
 
       {
-        isLoading
+        isPending
           ? (
             <Loading color='blue' />
           )
