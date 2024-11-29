@@ -4,7 +4,6 @@ import React, { useEffect } from 'react';
 
 // Hooks
 import { useQuery } from '@tanstack/react-query';
-import useApi from '@/hooks/useApi';
 
 // Components
 import { FlatList, TouchableOpacity, View } from 'react-native';
