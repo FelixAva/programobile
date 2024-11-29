@@ -24,6 +24,23 @@ const getTopArtist = async ( country: string ) => {
   });
 };
 
+const getArtistData = async ( mbid: string ) => {
+  const params = {
+    method: 'artist.getinfo',
+    mbid: mbid,
+  };
+
+  const { data } = await apiManager.get( '/', { params } );
+  const artist: ArtistResource = data.artist;
+
+  return {
+    id: `${artist.mbid}`,
+    name: artist.name,
+    image: artist.image[0]["#text"]
+  };
+};
+
 export {
-  getTopArtist
+  getTopArtist,
+  getArtistData
 }
