@@ -15,10 +15,10 @@ import {
   Text,
   Image
 } from 'react-native';
+import { Loading } from '@/UI';
 
 // Extras (Helpers, Constants, Types, Interfaces, Etc)
 import { getArtistData } from '@/api/api-client';
-import { Loading } from '@/UI';
 
 const MainContainer = styled(View)`
   flex: 1;
