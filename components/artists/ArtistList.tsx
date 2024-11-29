@@ -3,24 +3,28 @@ import { useRouter } from 'expo-router';
 import React, { useEffect } from 'react';
 
 // Hooks
+import { useQuery } from '@tanstack/react-query';
 import useApi from '@/hooks/useApi';
 
 // Components
-import { FlatList, TouchableOpacity } from 'react-native';
+import { FlatList, TouchableOpacity, View } from 'react-native';
 import ArtistBox from '../ArtistBox';
+import { Loading } from '@/UI';
 
-export default function ArtistList() {
+// Extras (Helpers, Constants, Types, Interfaces, Etc)
+import { getTopArtist } from '@/api/api-client';
+
+export default function ArtistList( { country }: { country: string } ) {
   const router = useRouter();
   const {
-    error,
     isLoading,
-    topArtist,
-    getTopArtist
-  } = useApi();
-
-  useEffect(() => {
-    getTopArtist('spain');
-  }, [])
+    data,
+    isError,
+    error
+  } = useQuery({
+    queryKey: ['topArtists'],
+    queryFn: () => getTopArtist( country )
+  });
 
   const handlePress = ( id: string ) => router.push({
     pathname: "/tabs/(artists)/[id]",
@@ -29,9 +33,16 @@ export default function ArtistList() {
     },
   })
 
+  //! Later change it to a skeleton
+  if (isLoading) return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Loading color='blue' size={70} />
+    </View>
+  );
+
   return (
     <FlatList
-      data={topArtist}
+      data={data}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
         <TouchableOpacity
