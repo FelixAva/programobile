@@ -34,11 +34,7 @@ export default function ArtistList( { country }: { country: string } ) {
   })
 
   //! Later change it to a skeleton
-  if (isLoading) return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Loading color='blue' size={70} />
-    </View>
-  );
+  if (isLoading) return <Loading color='blue' size={70} />;
 
   return (
     <FlatList
