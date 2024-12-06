@@ -9,6 +9,8 @@ import { useUserStore } from '@/hooks/useUser';
 export default function TabLayout() {
   const { session } = useUserStore();
 
+  if ( !session ) return null;
+
   return (
     <Tabs
       screenOptions={{
@@ -30,7 +32,7 @@ export default function TabLayout() {
           href: {
             pathname: '/tabs/(profile)/[user]',
             params: {
-              user: `eva`
+              user: `${session.name}`
             }
           },
           tabBarIcon: ({ color }) => <TabBarIcon name='person-outline' color={ color } />,
