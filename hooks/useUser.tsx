@@ -7,6 +7,7 @@ interface UserState {
   data: User | undefined;
   setSession: (data: UserSession) => void;
   setData: (data: User) => void;
+  deleteUserData: () => void;
 }
 
 export const useUserStore = create<UserState>()(
@@ -20,6 +21,10 @@ export const useUserStore = create<UserState>()(
       })),
       setData: (data) => set(() => ({
         data: data
+      })),
+      deleteUserData: () => set(() => ({
+        data: undefined,
+        session: undefined
       }))
     }),
     {
