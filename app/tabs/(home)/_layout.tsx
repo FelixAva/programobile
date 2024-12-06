@@ -5,6 +5,7 @@ import React from 'react';
 export default function DynamicTabLayout() {
   return (
     <Stack
+      
       screenOptions={{
         headerTitleAlign: 'center'
       }}

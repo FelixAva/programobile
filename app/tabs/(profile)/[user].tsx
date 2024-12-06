@@ -20,6 +20,7 @@ import { Button } from '@/components';
 // Extras (Helpers, Constants, Types, Interfaces, Etc)
 import { capitalize } from '@/helpers/capitalize';
 import { Colors } from '@/constants/Colors';
+import { useUserStore } from '@/hooks/useUser';
 
 const MainContainer = styled(View)`
   flex: 1;
@@ -32,6 +33,7 @@ export default function User() {
   const navigation = useNavigation();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>( false );
+  const { deleteUserData } = useUserStore();
 
   useEffect( () => {
     navigation.setOptions({
@@ -41,10 +43,8 @@ export default function User() {
 
   const onLogOut = () => {
     setIsLoading( true );
-    setTimeout(() => {
-      router.replace('/');
-      setIsLoading( false );
-    }, 2000);
+    deleteUserData();
+    alert('Log Out successfully');
   };
 
   return (
