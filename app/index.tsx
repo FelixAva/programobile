@@ -19,6 +19,7 @@ import { Loading } from '@/UI';
 // Extras (Helpers, Constants, Types, Interfaces, Etc)
 import { getMobileSession } from '@/api/api-client';
 import { UserLogin } from '@/types/user';
+import { useUserStore } from '@/hooks/useUser';
 
 const MainContainer = styled(View)`
   flex: 1;
@@ -53,16 +54,18 @@ export default function Index() {
     }
   });
 
+  const { setSession } = useUserStore();
+
   const {
     mutate,
     isPending,
     isError,
     error,
-    data
   } = useMutation({
     mutationFn: getMobileSession,
     onSuccess: (data) => {
-      console.log('Storage the user session');
+      /* Storage the user's session data */
+      setSession( data );
       alert(`Welcome ${data.name}`);
       router.replace('/tabs');
     }
