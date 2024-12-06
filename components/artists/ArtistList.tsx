@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 
 // Components
 import { FlatList, TouchableOpacity, View } from 'react-native';
-import ArtistBox from '../ArtistBox';
+import ArtistBox from './ArtistBox';
 import { Loading } from '@/UI';
 
 // Extras (Helpers, Constants, Types, Interfaces, Etc)
