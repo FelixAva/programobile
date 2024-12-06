@@ -3,6 +3,7 @@
 import InputField from "./shared/InputField";
 import Link from "./shared/Link";
 import Button from "./shared/Button";
+import AuthValidator from "./shared/AuthValidator";
 
 // Artists folder
 import ArtistList from "./artists/ArtistList";
@@ -14,6 +15,7 @@ export {
   InputField,
   Link,
   Button,
+  AuthValidator,
   ArtistList,
   TabBarIcon
 }

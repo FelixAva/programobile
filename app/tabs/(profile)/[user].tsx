@@ -44,10 +44,6 @@ export default function User() {
   const onLogOut = () => {
     setIsLoading( true );
     deleteUserData();
-    setTimeout(() => {
-      router.replace('/');
-      setIsLoading( false );
-    }, 1000);
   };
 
   return (
