@@ -26,7 +26,7 @@ export default function ArtistList( { country }: { country: string } ) {
   });
 
   const handlePress = ( id: string ) => router.push({
-    pathname: "/tabs/(artists)/[id]",
+    pathname: "/tabs/(home)/artist/[id]",
     params: {
       id: id,
     },

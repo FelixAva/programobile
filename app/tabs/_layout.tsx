@@ -4,8 +4,11 @@ import React from 'react';
 
 // Components
 import { TabBarIcon } from '@/components';
+import { useUserStore } from '@/hooks/useUser';
 
 export default function TabLayout() {
+  const { session } = useUserStore();
+
   return (
     <Tabs
       screenOptions={{
@@ -14,7 +17,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name='(artists)'
+        name='(home)'
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => <TabBarIcon name='home-outline' color={ color } />,
@@ -27,7 +30,7 @@ export default function TabLayout() {
           href: {
             pathname: '/tabs/(profile)/[user]',
             params: {
-              user: 'evanbacon'
+              user: `eva`
             }
           },
           tabBarIcon: ({ color }) => <TabBarIcon name='person-outline' color={ color } />,
