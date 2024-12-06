@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { devtools, persist } from 'zustand/middleware';
 import { User, UserSession } from '../types/user';
 
 interface UserState {
@@ -8,13 +9,21 @@ interface UserState {
   setData: (data: User) => void;
 }
 
-const useUserStore = create<UserState>()((set) => ({
-  session: undefined,
-  data: undefined,
-  setSession: ( data ) => set(() => ({
-    session: data
-  })),
-  setData: (data) => set(() => ({
-    data: data
-  }))
-}));
+export const useUserStore = create<UserState>()(
+  devtools(
+    persist(
+      (set) => ({
+      session: undefined,
+      data: undefined,
+      setSession: ( data ) => set(() => ({
+        session: data
+      })),
+      setData: (data) => set(() => ({
+        data: data
+      }))
+    }),
+    {
+      name: 'userStore'
+    }
+  )
+));
