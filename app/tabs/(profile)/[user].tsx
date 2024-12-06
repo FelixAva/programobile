@@ -44,6 +44,7 @@ export default function User() {
   const onLogOut = () => {
     setIsLoading( true );
     deleteUserData();
+    alert('Log Out successfully');
   };
 
   return (
